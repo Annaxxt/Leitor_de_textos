@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Leitor de textos</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="page">
+        <header class="page-header">
+            <div class="logo-badge">📄</div>
+            <h1>Leitor de textos</h1>
+            <p class="subtitle">Faça upload de uma imagem ou PDF e extraia o texto automaticamente</p>
+        </header>
+
+        <main>
+            <form method="post" enctype="multipart/form-data" id="upload-form">
+                <label for="imagem" class="dropzone">
+                    <i class="fa-solid fa-upload"></i>
+
+                    <span class="dropzone-title">Escolher arquivo</span>
+                    <span class="dropzone-hint">PNG, JPG ou PDF</span>
+                    <input id="imagem" type="file" name="arquivo" accept=".png,.jpg,.jpeg,.pdf" required>
+                </label>
+
+                <span class="file-name" id="file-name-display"></span>
+
+                <button class="button" type="submit">
+                    <span>Ler texto</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </main>
+
+        {% if texto is not none %}
+            <section class="resposta {{ 'success' if encontrado else 'empty' }}">
+                {% if encontrado %}
+                    <div class="status-badge success">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Texto encontrado
+                    </div>
+                    <pre>{{ texto }}</pre>
+                {% else %}
+                    <div class="status-badge empty">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        Nenhum texto encontrado
+                    </div>
+                {% endif %}
+            </section>
+        {% endif %}
+    </div>
+
+    <script>
+        const input = document.getElementById('imagem');
+        const display = document.getElementById('file-name-display');
+        if (input) {
+            input.addEventListener('change', () => {
+                display.textContent = input.files[0] ? input.files[0].name : '';
+            });
+        }
+    </script>
+</body>
+</html>
