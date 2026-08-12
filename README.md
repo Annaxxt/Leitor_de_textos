@@ -35,7 +35,10 @@ O objetivo deste projeto foi colocar em prática conhecimentos de Python, Flask,
 ## Requisitos para executar PDFs escaneados
 1. Para processar PDFs escaneados é necessário instalar o Poppler.
 - [Acessar link para instalar - ](https://github.com/oschwartz10612/poppler-windows/releases)<br>
-Após a instalação, adicione a pasta `Library/bin` ao PATH do sistema.
+2. Dentro da pasta procure por "Library --> "bin" e copie o caminho completo.<br>
+Ex.: C:\poppler\Library\bin<br>
+
+3. Modifique no código "app.py" Ex.: POPPLER_PATH = r"C:\poppler\Library\bin".
 
 
 ## 🚀 Melhorias futuras

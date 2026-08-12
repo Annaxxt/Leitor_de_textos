@@ -16,7 +16,7 @@
     --success: #8c34c7;
     --success-bg: #eee9f9;
     --neutral-bg: #F0F0F2;
-    --drop:rgba(87, 0, 227, 0.04);
+    --drop: rgba(87, 0, 227, 0.04);
     --border: #E5E5EA;
     --radius-lg: 24px;
     --radius-md: 16px;
@@ -128,9 +128,6 @@ form {
     inset: 0;
     opacity: 0;
     cursor: pointer;
-}
-.fa-solid fa-upload {
-    margin-bottom: 10px;
 }
 
 .dropzone-title {
