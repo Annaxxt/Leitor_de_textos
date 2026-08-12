@@ -17,13 +17,14 @@ O objetivo deste projeto foi colocar em prática conhecimentos de Python, Flask,
     - Tesseract OCR
     - Pillow (PIL)
     - Git
+    - Poppler
 
 ## ✨ Funcionalidade
 - Realiza o upload de imagens e PDFs para reconhecimento de texto. 
 - Utiliza OCR (Reconhecimento Óptico de Caracteres) para identificar textos presentes nas imagens e documentos.
 - Exibe o texto extraído diretamente na interface da aplicação.
 - Interface simples e intuitiva para facilitar o uso ao usuário.
-- Desenvolvido para funcionar localmente em ambiente web utilizando Flask. 
+- Desenvolvido inicialmente para execução local utilizando Flask.
 
 ## ▶️ Como executar
 1. Clone o projeto
@@ -43,14 +44,14 @@ Ex.: C:\poppler\Library\bin<br>
 
 ## 🚀 Melhorias futuras
 - Exportação do texto para arquivo .txt
-- Suporte a mais extenções
+- Suporte a mais extensões
 - Seleção do idioma utilizado pelo OCR
 
 
 ## ​💡​ Sobre
 Este projeto foi desenvolvido para fins de estudo e portfólio, com foco em demonstrar conhecimentos em desenvolvimento Python, manipulação de arquivos, utilização de OCR e boas práticas de organização de projetos.
 
-- Autora: Anna Clara - Estudante do 4° período de Ciência da Computacão na UNINOVE.
+- Autora: Anna Clara - Estudante do 4° semestre de Ciência da Computacão na UNINOVE.
 
 [LinkedIn](https://www.linkedin.com/in/annaxxt/)<br>
 [GitHub](https://github.com/Annaxxt)
