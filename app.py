@@ -56,6 +56,8 @@ def extensao_valida(nome_arquivo, extensoes):
 def processar_imagem(arquivo_bytes):
     imagem = Image.open(io.BytesIO(arquivo_bytes))
     imagem.load()
+    
+    imagem.thumbnail((2000, 2000))
     return pytesseract.image_to_string(imagem, lang="por")
 
 
@@ -71,7 +73,7 @@ def processar_pdf(pdf_bytes):
     if texto.strip():
         return texto
     
-    kwargs = {"dpi": 300}
+    kwargs = {"dpi": 150}
     if POPPLER_PATH:
         kwargs["poppler_path"] = POPPLER_PATH
         
