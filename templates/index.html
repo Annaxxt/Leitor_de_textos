@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Leitor de Textos</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <title>Leitor de Textos</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
     <div class="page">
         <header class="page-header">
             <div class="logo-badge">📄</div>
             <h1>Leitor de Textos</h1>
-            <p class="subtitle">Faça upload de uma imagem ou PDF e extraia o texto automaticamente.</p>
+            <p class="subtitle">
+                Faça upload de uma imagem ou PDF e extraia o texto automaticamente.
+            </p>
         </header>
 
         <main>
@@ -23,7 +26,7 @@
 
                     <span class="dropzone-title">Escolher arquivo</span>
                     <span class="dropzone-hint">PNG, JPG ou PDF</span>
-                    <input id="imagem" type="file" name="arquivo" accept=".png,.jpg,.jpeg,.pdf" required>
+                    <input id="imagem" type="file" name="arquivo" accept=".png,.jpg,.jpeg,.pdf" required />
                 </label>
 
                 <span class="file-name" id="file-name-display"></span>
@@ -32,35 +35,64 @@
                     <span>Ler texto</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
+                <!-- adicionei essa div para retornar um span quando estiver processando o arquivo selecionado pelo usuário -->
+                <div id="loading-message" class="loading-message">
+                    <i class="fa-solid fa-spinner fa-spin"> </i>
+                </div>
+                <span>
+                    Processando arquivo...</span>
             </form>
         </main>
 
         {% if texto is not none %}
-            <section class="resposta {{ 'success' if encontrado else 'empty' }}">
-                {% if encontrado %}
-                    <div class="status-badge success">
-                        <i class="fa-solid fa-circle-check"></i>
-                        Texto encontrado
-                    </div>
-                    <pre>{{ texto }}</pre>
-                {% else %}
-                    <div class="status-badge empty">
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        Nenhum texto encontrado
-                    </div>
-                {% endif %}
-            </section>
+        <section class="resposta {{ 'success' if encontrado else 'empty' }}">
+            {% if encontrado %}
+            <div class="status-badge success">
+                <i class="fa-solid fa-circle-check"></i>
+                Texto encontrado
+            </div>
+            <pre>{{ texto }}</pre>
+            {% else %}
+            <div class="status-badge empty">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Nenhum texto encontrado
+            </div>
+            {% endif %}
+        </section>
         {% endif %}
     </div>
 
+    <!-- <script> const input = document.getElementById('imagem'); const display = document.getElementById('file-name-display'); if (input) { input.addEventListener('change', () => { display.textContent = input.files[0] ? input.files[0].name : ''; }); } </script>
+    mudei o script praticamente por completo -->
+
     <script>
-        const input = document.getElementById('imagem');
-        const display = document.getElementById('file-name-display');
+        const input = document.getElementById("imagem");
+        const display = document.getElementById("file-name-display");
+        const form = document.getElementById("upload-form");
+        const button = form.querySelector(".button");
+        const loadingMessage = document.getElementById("loading-message");
+
         if (input) {
-            input.addEventListener('change', () => {
-                display.textContent = input.files[0] ? input.files[0].name : '';
+            input.addEventListener("change", () => {
+                display.textContent = input.files[0] ? input.files[0].name : "";
             });
         }
+
+        form.addEventListener("submit", () => { /* adicionei para detectar quando o usuário clica no botão ler texto e fazer algumas coisas:*/
+            button.disabled = true; /* quando ele clica o botão é desabitlitado, evitando mais tentativas e sobrecarga do servidor*/
+            button.querySelector("span").textContent = "Processando..."; /* mudei o texto do botão */
+
+            loadingMessage.classList.add("show");
+
+            setTimeout(() => { /* coloquei esse timeout de 5000 milisegundos que é 5 segundos, se passar de 5 segundos
+                 que o usuário clicou no botão e o texto não foi retornado, ele mostra a mensagem abaixo */
+                loadingMessage.innerHTML = `
+                <i class="fa-solid fa-clock"></i>
+                <span>Está demorando mais que o esperado. Por favor, aguarde mais 30 segundos.</span>
+            `;
+            }, 5000);
+        });
     </script>
 </body>
+
 </html>

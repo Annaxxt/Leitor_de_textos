@@ -231,3 +231,17 @@ form {
         font-size: 24px;
     }
 }
+
+.loading-message {
+    display: none;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.loading-message.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}

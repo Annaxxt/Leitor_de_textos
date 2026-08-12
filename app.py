@@ -57,7 +57,9 @@ def processar_imagem(arquivo_bytes):
     imagem = Image.open(io.BytesIO(arquivo_bytes))
     imagem.load()
     
-    imagem.thumbnail((2000, 2000))
+    imagem.thumbnail((1200, 1200)) # esses valores servem para definir a altura e a largura que a imagem que foi 
+    # escolhida vai receber, se a imagem tiver 4000x2000, ela vai ser diminuída para 2000x1000. quanto mais pixels, 
+    # mais lentidão no tesseract. tem que ir testando até chegar em um valor interessante. antes estava 2000x2000
     return pytesseract.image_to_string(imagem, lang="por")
 
 
@@ -73,11 +75,13 @@ def processar_pdf(pdf_bytes):
     if texto.strip():
         return texto
     
-    kwargs = {"dpi": 150}
+    kwargs = {"dpi": 150} # dpi é pontos por polegadas das imagens de um pdf, ele define a nitidez das fotos, ou seja, 
+    # se o pdf tiver muitas páginas, o valor de 150 pode ser pesado. o correto é ir testando com valores menores
     if POPPLER_PATH:
         kwargs["poppler_path"] = POPPLER_PATH
         
-    paginas = convert_from_bytes(pdf_bytes, **kwargs)
+    paginas = convert_from_bytes(pdf_bytes, dpi = 120, **kwargs) # limitei o tamanho das imagens que vão para o tesseract. 
+    # dpi menor = mais rápido = ocr potencialmente pior, dpi maior = mais lento = ocr potencialmente melhor
     for pagina in paginas:
         texto += pytesseract.image_to_string(pagina, lang="por") + "\n"
         
