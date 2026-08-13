@@ -35,12 +35,11 @@
                     <span>Ler texto</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
-                <!-- adicionei essa div para retornar um span quando estiver processando o arquivo selecionado pelo usuário -->
+        
                 <div id="loading-message" class="loading-message">
                     <i class="fa-solid fa-spinner fa-spin"> </i>
                 </div>
-                <span>
-                    Processando arquivo...</span>
+
             </form>
         </main>
 
@@ -62,9 +61,6 @@
         {% endif %}
     </div>
 
-    <!-- <script> const input = document.getElementById('imagem'); const display = document.getElementById('file-name-display'); if (input) { input.addEventListener('change', () => { display.textContent = input.files[0] ? input.files[0].name : ''; }); } </script>
-    mudei o script praticamente por completo -->
-
     <script>
         const input = document.getElementById("imagem");
         const display = document.getElementById("file-name-display");
@@ -78,14 +74,13 @@
             });
         }
 
-        form.addEventListener("submit", () => { /* adicionei para detectar quando o usuário clica no botão ler texto e fazer algumas coisas:*/
-            button.disabled = true; /* quando ele clica o botão é desabitlitado, evitando mais tentativas e sobrecarga do servidor*/
-            button.querySelector("span").textContent = "Processando..."; /* mudei o texto do botão */
+        form.addEventListener("submit", () => { 
+            button.disabled = true; 
+            button.querySelector().textContent = "Processando..."; 
 
             loadingMessage.classList.add("show");
 
-            setTimeout(() => { /* coloquei esse timeout de 5000 milisegundos que é 5 segundos, se passar de 5 segundos
-                 que o usuário clicou no botão e o texto não foi retornado, ele mostra a mensagem abaixo */
+            setTimeout(() => { 
                 loadingMessage.innerHTML = `
                 <i class="fa-solid fa-clock"></i>
                 <span>Está demorando mais que o esperado. Por favor, aguarde mais 30 segundos.</span>
